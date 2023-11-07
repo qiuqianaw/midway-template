@@ -11,6 +11,7 @@ export class WeatherController {
   async getWeatherController(
     @Query('cityId') cityId: string
   ): Promise<WeatherInfo> {
+    console.log(process.config);
     return this.weatherService.getWeather(cityId);
   }
 }

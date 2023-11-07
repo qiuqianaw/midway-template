@@ -7,6 +7,7 @@ import { join } from 'path';
 // import { NotFoundFilter } from './filter/notfound.filter';
 import { ReportMiddleware } from './global/middleware/report.middleware';
 import { WeatherErrorFilter } from './modules/weather/filter/weather.filter';
+import config from './config/config.default';
 
 @Configuration({
   imports: [
@@ -17,13 +18,15 @@ import { WeatherErrorFilter } from './modules/weather/filter/weather.filter';
       enabledEnvironment: ['local'],
     },
   ],
-  importConfigs: [join(__dirname, './config')],
+  importConfigs: [join(__dirname, './config/config.default.ts')],
 })
 export class MainConfiguration {
   @App('koa')
   app: koa.Application;
 
   async onReady() {
+    console.log(config.db);
+    console.log(process.env);
     // add middleware
     this.app.useMiddleware([ReportMiddleware]);
     // add filter
